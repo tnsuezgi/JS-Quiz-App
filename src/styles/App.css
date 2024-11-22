@@ -1,0 +1,132 @@
+.App {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(180deg, rgba(163, 230, 53, 1) 0%, #FFFFFF 89.63%);
+  overflow-x: hidden;
+
+  .colorLogo{
+    color: #78350F;
+  }
+
+  .btn-outline-custom {
+    border-width: 2px;
+    width: 149px;
+    height: 48px;
+    font-weight: 500;
+  }
+  .btn-border-color-brown{
+    color: #78350F;
+    border-color: #78350F;
+    &:hover {
+      background-color: #78350F;
+      color: #fffbeb;
+    }
+  }
+  .btn-border-color-white{
+    color: #fff;
+    border-color: #fff;
+    &:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+  }
+  .btn-outline-not-border{
+    border: 2px solid transparent;
+    color: #78350F;
+    width: 149px;
+    height: 48px;
+    &:hover {
+      border: 2px solid #78350F;
+      color: #78350F;
+    }
+  }
+  .btn-collection {
+    border: 2px solid transparent;
+    width: 256px;
+    height: 48px;
+    font-weight: 600;
+    white-space: nowrap;
+    &:hover {
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.07), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    &:focus {
+      outline: none;
+    }
+    &:hover.bi-arrow-right{
+      display: block;
+    }
+    img{
+      font-size: 12px;
+    }
+  }
+  .btn-collection:nth-child(1) {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.07), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  .btn-active{
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.07), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .interface-gen-color{
+    color:#78350F !important;
+  }
+
+  .font-size-14{
+    font-size: 14px !important;
+  }
+
+  .font-size-16{
+    font-size: 16px !important;
+  }
+
+  .font-size-18{
+    font-size: 18px !important;
+  }
+
+  .font-size-20{
+    font-size: 20px !important;
+  }
+
+  .font-size-24{
+    font-size: 24px !important;
+  }
+
+  .font-size-56{
+    font-size: 56px !important;
+  }
+
+  .text-bold{
+    font-weight: bold !important;
+  }
+
+  .background-color-lac{
+    background-color: #0F172A !important;
+  }
+
+  .footer-color{
+    color: rgba(226, 232, 240, 1) !important;
+  }
+
+  .font-weight-500 {
+    font-weight: 500;
+  }
+
+  .font-weight-800 {
+    font-weight: 800;
+  }
+  /*---*/
+  .question-area{
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 570px) {
+  .App{
+    .btn-collection {
+
+    }
+
+  }
+}
+@media screen and (min-width: 570px) and (max-width: 894px) {
+
+}
