@@ -68,14 +68,12 @@
     }
   }
 
-  .answered {
-    background-color: #E1F0EC;
-    color: #2C8C72 !important;
-  }
-
-  .current {
-    background-color: #cce5ff;
-    color: #004085;
+  .table{
+    border: 2px solid #2C8C72;
+    border-radius: 5px;
+    .bad-answ{
+      color: #cf0000;
+    }
   }
 
   .font-size-14{

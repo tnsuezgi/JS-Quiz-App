@@ -16,9 +16,9 @@ const Quiz = () => {
                     const options = question.body
                         .split("\n")
                         .slice(0, 4)
-                        .map((option, index) => `${String.fromCharCode(65 + index)} | ${option}`); // A, B, C, D ekle
+                        .map((option, index) => `${String.fromCharCode(65 + index)}) ${option}`); // A, B, C, D ekle
                     return {
-                        question: capitalizeFirstLetter(question.title) + " -> " + capitalizeFirstLetter(question.body),
+                        question: capitalizeFirstLetter(question.title) + " > " + capitalizeFirstLetter(question.body),
                         options,
                         answer: ""
                     };
@@ -89,12 +89,12 @@ const Quiz = () => {
         return (
             <div className={"row d-flex flex-column align-items-center"}>
                 <div className="container d-flex flex-column align-items-center justify-content-center mb-5">
-                    <div className={"col-8 my-5"}>
+                    <div className={"col-10 col-md-4 my-5"}>
                         <table className="table">
                             <thead>
                             <tr>
                                 <th className={"text-start"} style={{width: "100px"}}>Soru</th>
-                                <th className={"text-start"}>İçerik</th>
+                                {/*<th className={"text-start"}>İçerik</th>*/}
                                 <th className={"text-start"}>Cevap</th>
                             </tr>
                             </thead>
@@ -102,19 +102,16 @@ const Quiz = () => {
                             {answers.map((ans, index) => (
                                 index < 10 &&
                                 <tr key={index}>
-                                    <td className={"text-start color-spec text-bold"}>Soru {index+1}</td>
-                                    <td className={"text-start"}>{ans.question}</td>
+                                    <td className={"text-start color-spec text-bold"}>Soru {index + 1}</td>
+                                    {/*<td className={"text-start"}>{ans.question}</td>*/}
                                     <td className={`text-start ${
-                                        !ans[index]
-                                            ? "pending"
-                                            : ans[index]?.answer !== "Cevap verilmedi"
-                                                ? "answered"
-                                                : "pending"
+                                        ans.answer === "Cevap verilmedi" ? "bad-answ" : ""
                                     }`}>{ans.answer}</td>
                                 </tr>
                             ))}
                             </tbody>
                         </table>
+                        <span className={"font-size-16 text-bold"}>- Sınav süresi sona erdi -</span>
                     </div>
                 </div>
             </div>
@@ -157,7 +154,15 @@ const Quiz = () => {
                             {questions.map((_, index) => (
                                 <li
                                     key={index}
-                                    className={`status-item my-2`}
+                                    className={`status-item my-2 ${
+                                        currentIndex === index
+                                            ? "current"
+                                            : !answers[index]
+                                                ? "pending"
+                                                : answers[index]?.answer !== "Cevap verilmedi"
+                                                    ? "answered"
+                                                    : "pending"
+                                    }`}
                                 >
                                     <span>Quiz Sorusu {index + 1}</span>
                                 </li>
