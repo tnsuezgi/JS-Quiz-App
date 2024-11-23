@@ -16,11 +16,11 @@ const Quiz = () => {
                     const options = question.body
                         .split("\n")
                         .slice(0, 4)
-                        .map((option, index) => `${String.fromCharCode(65 + index)}) ${option}`); // A, B, C, D ekle
+                        .map((option, index) => `${String.fromCharCode(65 + index)} | ${option}`); // A, B, C, D ekle
                     return {
-                        question: capitalizeFirstLetter(question.title) + " -> " + capitalizeFirstLetter(question.title),
+                        question: capitalizeFirstLetter(question.title) + " -> " + capitalizeFirstLetter(question.body),
                         options,
-                        correctAnswer: options[0], // Doğru şık (örnek olarak ilk şık seçildi)
+                        answer: ""
                     };
                 });
                 setQuestions(parsedQuestions);
@@ -31,6 +31,14 @@ const Quiz = () => {
 
         fetchQuestions();
     }, []);
+
+    useEffect(() => {
+        console.log("Questions: ", questions)
+    }, [questions]);
+
+    useEffect(() => {
+        console.log("answers: ", answers)
+    }, [answers]);
 
     // Zamanlayıcı
     useEffect(() => {
@@ -48,7 +56,7 @@ const Quiz = () => {
             ...prev,
             {
                 question: questions[currentIndex]?.question,
-                answer: "No Answer",
+                answer: "Cevap verilmedi"
             },
         ]);
         setTimer(30);
@@ -57,6 +65,7 @@ const Quiz = () => {
     };
 
     const handleAnswer = (selectedOption) => {
+        console.log("selectedOption", selectedOption)
         if (isClickable) {
             setAnswers((prev) => [
                 ...prev,
@@ -80,20 +89,28 @@ const Quiz = () => {
         return (
             <div className={"row d-flex flex-column align-items-center"}>
                 <div className="container d-flex flex-column align-items-center justify-content-center mb-5">
-                    <div className={"col-6 my-5"}>
-                        <h3>Quiz Sonuçları:</h3>
+                    <div className={"col-8 my-5"}>
                         <table className="table">
                             <thead>
                             <tr>
-                                <th>Soru</th>
-                                <th>Cevap</th>
+                                <th className={"text-start"} style={{width: "100px"}}>Soru</th>
+                                <th className={"text-start"}>İçerik</th>
+                                <th className={"text-start"}>Cevap</th>
                             </tr>
                             </thead>
                             <tbody>
                             {answers.map((ans, index) => (
+                                index < 10 &&
                                 <tr key={index}>
-                                    <td>{ans.question}</td>
-                                    <td>{ans.answer}</td>
+                                    <td className={"text-start color-spec text-bold"}>Soru {index+1}</td>
+                                    <td className={"text-start"}>{ans.question}</td>
+                                    <td className={`text-start ${
+                                        !ans[index]
+                                            ? "pending"
+                                            : ans[index]?.answer !== "Cevap verilmedi"
+                                                ? "answered"
+                                                : "pending"
+                                    }`}>{ans.answer}</td>
                                 </tr>
                             ))}
                             </tbody>
@@ -106,25 +123,47 @@ const Quiz = () => {
 
     return (
         <div className={"row d-flex flex-column align-items-center"}>
-            <div className="container d-flex flex-column align-items-center my-5">
-                <div className={"col-9 col-md-6"}>
-                    <div className="question-area">
-                        <h4 className={"text-start text-bold"}>Soru {currentIndex + 1}:</h4>
-                        <p className={"text-start"}>{questions[currentIndex]?.question}</p>
+            <div className="container d-flex flex-column flex-md-row my-3 justify-content-center">
+                <div className={"col-12 col-md-6 p-3"}>
+                    <div className="question-area ">
+                        <h4 className={"text-start text-bold color-spec"}>Soru {currentIndex + 1}:</h4>
+                        <h5 className={"text-start text-500 my-3 my-md-0"}>{questions[currentIndex]?.question}</h5>
                     </div>
                     <div className="options d-flex flex-column ">
-                    {questions[currentIndex]?.options.map((option, index) => (
+                        {questions[currentIndex]?.options.map((option, index) => (
                             <button
                                 key={index}
-                                className="btn btn-primary m-2 answ-button"
+                                className="btn answer-button m-2 text-start"
                                 onClick={() => handleAnswer(option)}
                                 disabled={!isClickable}
+                                style={{opacity: !isClickable ? 0.4 : 1}}
                             >
                                 {option}
                             </button>
                         ))}
                     </div>
-                    <p className={"text-center my-5"}><span className={"text-bold"}>Kalan Süre:</span> {timer} saniye</p>
+                </div>
+                <div className={"col-12 col-md-3 d-flex flex-column align-items-center "}>
+                    <div className={"d-flex flex-column box-shadow justify-content-center timer-area"}>
+                        <div className={"timer-cycle"}></div>
+                        <p className={"text-center text-bold"}>
+                            0:{timer}
+                        </p>
+                        <span>Kalan Süre</span>
+                    </div>
+                    <div className="question-status mt-4 box-shadow">
+                        <h5 className="text-center font-size-18">Quiz Soru Listesi</h5>
+                        <ul className="list-unstyled">
+                            {questions.map((_, index) => (
+                                <li
+                                    key={index}
+                                    className={`status-item my-2`}
+                                >
+                                    <span>Quiz Sorusu {index + 1}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
