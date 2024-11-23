@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  /*font-family: 'Roboto', sans-serif;*/
   overflow-x: hidden;
 
   .color-spec{
@@ -76,20 +75,12 @@
     }
   }
 
-  .font-size-14{
-    font-size: 14px !important;
-  }
-
   .font-size-16{
     font-size: 16px !important;
   }
 
   .font-size-18{
     font-size: 18px !important;
-  }
-
-  .font-size-20{
-    font-size: 20px !important;
   }
 
   .font-size-22{
@@ -100,22 +91,6 @@
     font-weight: bold !important;
   }
 
-  .background-color-lac{
-    background-color: #0F172A !important;
-  }
-
-  .footer-color{
-    color: rgba(226, 232, 240, 1) !important;
-  }
-
-  .font-weight-500 {
-    font-weight: 500;
-  }
-
-  .font-weight-800 {
-    font-weight: 800;
-  }
-  /*---*/
   .question-area{
     min-height: 150px;
   }

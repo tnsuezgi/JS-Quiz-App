@@ -16,7 +16,7 @@ const Quiz = () => {
                     const options = question.body
                         .split("\n")
                         .slice(0, 4)
-                        .map((option, index) => `${String.fromCharCode(65 + index)}) ${option}`); // A, B, C, D ekle
+                        .map((option, index) => `${String.fromCharCode(65 + index)}) ${option}`); // A, B, C, D
                     return {
                         question: capitalizeFirstLetter(question.title) + " > " + capitalizeFirstLetter(question.body),
                         options,
@@ -45,7 +45,7 @@ const Quiz = () => {
         if (timer === 0) {
             handleNextQuestion();
         } else if (timer === 20) {
-            setIsClickable(true); // İlk 10 saniye sonra tıklama aktif
+            setIsClickable(true); // İlk 10 saniye sonra tıklama
         }
         const countdown = setInterval(() => setTimer((prev) => prev - 1), 1000);
         return () => clearInterval(countdown);
